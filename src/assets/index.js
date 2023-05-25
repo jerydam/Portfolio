@@ -27,8 +27,8 @@ import starbucks from "./company/starbucks.png";
 import tesla from "./company/tesla.png";
 
 import carrent from "./carrent.png";
-import jobit from "./jobit.png";
-import tripguide from "./tripguide.png";
+import jobit from "./stake.png";
+import tripguide from "./nft.png";
 
 export {
   logo,

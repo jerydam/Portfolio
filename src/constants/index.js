@@ -172,42 +172,42 @@ const experiences = [
 const testimonials = [
   {
     testimonial:
-      "I thought it was impossible to make a website as beautiful as our product, but Rick proved me wrong.",
+      "I thought it was impossible to make a website as beautiful as our product, but He proved me wrong.",
     name: "Sara Lee",
     designation: "CFO",
     company: "Acme Co",
-    image: "https://randomuser.me/api/portraits/women/4.jpg",
+    image: "https://randomuser.me/api/portraits/women/50.jpg",
   },
   {
     testimonial:
-      "I've never met a web developer who truly cares about their clients' success like Rick does.",
-    name: "Chris Brown",
-    designation: "COO",
-    company: "DEF Corp",
-    image: "https://randomuser.me/api/portraits/men/5.jpg",
+      "I've never met a Hard working and Determined person who truly cares about their work like Jery does.",
+    name: "Abiola O. Caleb",
+    designation: "CEO",
+    company: "Swiftconnect Affair NG",
+    image: "https://swiftconnect.com.ng/wp-content/uploads/2022/01/WhatsApp-Image-2022-01-06-at-8.28.07-AM-150x150.jpeg",
   },
   {
     testimonial:
-      "After Rick optimized our website, our traffic increased by 50%. We can't thank them enough!",
-    name: "Lisa Wang",
-    designation: "CTO",
-    company: "456 Enterprises",
-    image: "https://randomuser.me/api/portraits/women/6.jpg",
+      "When come to puntuality and quality work Jerydam has it all, fast delivery and good customer relation",
+    name: "Olutoye T. Abiodun",
+    designation: "CEO",
+    company: "Lead Developer",
+    image: "https://swiftconnect.com.ng/wp-content/uploads/2022/01/WhatsApp-Image-2022-01-06-at-9.37.50-AM-e1641491159697-150x150.jpeg",
   },
 ];
 
 const projects = [
   {
-    name: "Car Rent",
+    name: "MetaSqare",
     description:
       "Web-based platform that allows users to search, book, and manage car rentals from various providers, providing a convenient and efficient solution for transportation needs.",
     tags: [
       {
-        name: "react",
+        name: "NextJs",
         color: "blue-text-gradient",
       },
       {
-        name: "mongodb",
+        name: "Solidity",
         color: "green-text-gradient",
       },
       {
@@ -216,10 +216,10 @@ const projects = [
       },
     ],
     image: carrent,
-    source_code_link: "https://github.com/",
+    source_code_link: "https://github.com/jerydam/MetaSquare",
   },
   {
-    name: "Job IT",
+    name: "Staking dApp",
     description:
       "Web application that enables users to search for job openings, view estimated salary ranges for positions, and locate available jobs based on their current location.",
     tags: [
@@ -228,37 +228,37 @@ const projects = [
         color: "blue-text-gradient",
       },
       {
-        name: "restapi",
+        name: "solidity",
         color: "green-text-gradient",
       },
       {
-        name: "scss",
+        name: "tailwind",
         color: "pink-text-gradient",
       },
     ],
     image: jobit,
-    source_code_link: "https://github.com/",
+    source_code_link: "https://github.com/jerydam/StakingDapp",
   },
   {
-    name: "Trip Guide",
+    name: "NFT dApp",
     description:
       "A comprehensive travel booking platform that allows users to book flights, hotels, and rental cars, and offers curated recommendations for popular destinations.",
     tags: [
       {
-        name: "nextjs",
+        name: "React",
         color: "blue-text-gradient",
       },
       {
-        name: "supabase",
+        name: "Firebase",
         color: "green-text-gradient",
       },
       {
-        name: "css",
+        name: "solidity",
         color: "pink-text-gradient",
       },
     ],
     image: tripguide,
-    source_code_link: "https://github.com/",
+    source_code_link: "https://github.com/jerydam/NftDapp",
   },
 ];
 
