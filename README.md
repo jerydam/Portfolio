@@ -14,6 +14,3 @@ You'll also learn how to:
 - Make your code reusable and scalable using Higher Order Components (HOCs) and other industry-standard best practices
 - Implement sending emails through a form on the website
 - Ensure responsiveness across all devices and improve your site's performance using Suspense and Preload.
-
-## Stay up to date with new projects
-New major projects coming soon, subscribe to the mailing list to stay up to date https://jsmastery.pro
