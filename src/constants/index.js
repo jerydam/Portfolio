@@ -116,26 +116,26 @@ const technologies = [
 
 const experiences = [
   {
-    title: "React.js Developer",
-    company_name: "Web3Bridge",
+    title: "Frontend Developer",
+    company_name: "SQI College of ICT",
     icon: starbucks,
     iconBg: "#383E56",
-    date: "January 2023 - till Date",
+    date: "January 2021 - May 2022",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
+      "Learning to Develop and maintaining web applications using React.js, Next.js and other related technologies.",
       "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
       "Implementing responsive design and ensuring cross-browser compatibility.",
       "Participating in code reviews and providing constructive feedback to other developers.",
     ],
   },
   {
-    title: "Next.js Developer",
+    title: "Blockchain Developer",
     company_name: "Web3bridge",
     icon: tesla,
     iconBg: "#E6DEDD",
-    date: "Jan 2021 - Feb 2022",
+    date: "Jan 2023 till date",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
+      "Developing and maintaining Decentralised applications using Solidity and other related technologies.",
       "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
       "Implementing responsive design and ensuring cross-browser compatibility.",
       "Participating in code reviews and providing constructive feedback to other developers.",
@@ -143,25 +143,25 @@ const experiences = [
   },
   {
     title: "Web Developer",
-    company_name: "Shopify",
+    company_name: "SQI",
     icon: shopify,
     iconBg: "#383E56",
     date: "Jan 2022 - Jan 2023",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
+      "Developing and maintaining web applications using JavaScript, Node.js ,Typescript and other related technologies.",
       "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
       "Implementing responsive design and ensuring cross-browser compatibility.",
       "Participating in code reviews and providing constructive feedback to other developers.",
     ],
   },
   {
-    title: "Full stack Developer",
-    company_name: "Meta",
+    title: "Wordpress Developer",
+    company_name: "SwiftConnect",
     icon: meta,
     iconBg: "#E6DEDD",
-    date: "Jan 2023 - Present",
+    date: "November 2021 - Present",
     points: [
-      "Developing and maintaining web applications using React.js and other related technologies.",
+      "Developing and maintaining web applications wordpress and other related technologies.",
       "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
       "Implementing responsive design and ensuring cross-browser compatibility.",
       "Participating in code reviews and providing constructive feedback to other developers.",
@@ -190,8 +190,8 @@ const testimonials = [
     testimonial:
       "When come to puntuality and quality work Jerydam has it all, fast delivery and good customer relation",
     name: "Olutoye T. Abiodun",
-    designation: "CEO",
-    company: "Lead Developer",
+    designation: "Digital Markerter",
+    company: "Falsetto Bright LTD",
     image: "https://swiftconnect.com.ng/wp-content/uploads/2022/01/WhatsApp-Image-2022-01-06-at-9.37.50-AM-e1641491159697-150x150.jpeg",
   },
 ];
