@@ -42,11 +42,11 @@ export const navLinks = [
 
 const services = [
   {
-    title: "Blockchain Developer",
+    title: "Smart contract Developer",
     icon: web,
   },
   {
-    title: "React Developer",
+    title: "Blockchain Engineer",
     icon: mobile,
   },
   {
@@ -54,7 +54,7 @@ const services = [
     icon: backend,
   },
   {
-    title: "Wordpress Developer",
+    title: "Website Design",
     icon: creator,
   },
 ];
@@ -116,7 +116,7 @@ const technologies = [
 
 const experiences = [
   {
-    title: "Frontend Developer",
+    title: "Frontend Development",
     company_name: "SQI College of ICT",
     icon: starbucks,
     iconBg: "#383E56",
@@ -129,11 +129,11 @@ const experiences = [
     ],
   },
   {
-    title: "Blockchain Developer",
+    title: "Smart Contract Development",
     company_name: "Web3bridge",
     icon: tesla,
     iconBg: "#E6DEDD",
-    date: "Jan 2023 till date",
+    date: "Jan 2023 - May 2023",
     points: [
       "Developing and maintaining Decentralised applications using Solidity and other related technologies.",
       "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
@@ -142,20 +142,17 @@ const experiences = [
     ],
   },
   {
-    title: "Web Developer",
-    company_name: "SQI",
+    title: "Blockchain Engineering",
+    company_name: "Learning",
     icon: shopify,
     iconBg: "#383E56",
-    date: "Jan 2022 - Jan 2023",
+    date: "Jan 2023 - Till date",
     points: [
-      "Developing and maintaining web applications using JavaScript, Node.js ,Typescript and other related technologies.",
-      "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-      "Implementing responsive design and ensuring cross-browser compatibility.",
-      "Participating in code reviews and providing constructive feedback to other developers.",
+      "Venturing into the realm of blockchain with zero knowledge but boundless curiosity! As I embark on this exciting journey to become a Blockchain Engineer, I'm driven by an insatiable hunger to learn. From unraveling the intricacies of smart contracts to navigating the complexities of decentralized applications, I'm eager to chart new territories in the world of blockchain technology. Join me as I embrace the challenge of mastering the unknown and unlocking the potential of tomorrow's digital landscape.",
     ],
   },
   {
-    title: "Wordpress Developer",
+    title: "Web Development",
     company_name: "SwiftConnect",
     icon: meta,
     iconBg: "#E6DEDD",
