@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
-import { testimonials } from "../constants";
+import { supabase } from "../supabaseClient"; // 👈 New import
 
 const FeedbackCard = ({
   index,
@@ -44,6 +44,28 @@ const FeedbackCard = ({
 );
 
 const Feedbacks = () => {
+  const [testimonials, setTestimonials] = useState([]); // 👈 State for testimonials
+
+  useEffect(() => {
+    async function fetchTestimonials() {
+      const { data, error } = await supabase
+        .from('testimonials')
+        .select('*');
+
+      if (error) {
+        console.error('Error fetching testimonials:', error);
+      } else {
+        // Map image_url (from Supabase) to image (for the component prop)
+        const mappedTestimonials = data.map(t => ({
+          ...t,
+          image: t.image_url 
+        }));
+        setTestimonials(mappedTestimonials);
+      }
+    }
+    fetchTestimonials();
+  }, []);
+  
   return (
     <div className={`mt-12 bg-black-100 rounded-[20px]`}>
       <div
@@ -55,6 +77,7 @@ const Feedbacks = () => {
         </motion.div>
       </div>
       <div className={`-mt-20 pb-14 ${styles.paddingX} flex flex-wrap gap-7`}>
+        {/* Render dynamic testimonials */}
         {testimonials.map((testimonial, index) => (
           <FeedbackCard key={testimonial.name} index={index} {...testimonial} />
         ))}

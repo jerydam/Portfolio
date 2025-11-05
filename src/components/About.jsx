@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Tilt from "react-tilt";
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
-import { services } from "../constants";
+import { supabase, iconMap } from "../supabaseClient"; // 👈 New import
 import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
 
@@ -21,9 +21,10 @@ const ServiceCard = ({ index, title, icon }) => (
         }}
         className='bg-tertiary rounded-[20px] py-5 px-12 min-h-[280px] flex justify-evenly items-center flex-col'
       >
+        {/* 'icon' is now the resolved image path */}
         <img
-          src={icon}
-          alt='web-development'
+          src={icon} 
+          alt={title}
           className='w-16 h-16 object-contain'
         />
 
@@ -36,6 +37,28 @@ const ServiceCard = ({ index, title, icon }) => (
 );
 
 const About = () => {
+  const [services, setServices] = useState([]); // 👈 State for services
+
+  useEffect(() => {
+    async function fetchServices() {
+      const { data, error } = await supabase
+        .from('services')
+        .select('*');
+
+      if (error) {
+        console.error('Error fetching services:', error);
+      } else {
+        // Map the icon_url (string) to the actual imported asset
+        const mappedServices = data.map(service => ({
+          ...service,
+          icon: iconMap[service.icon_url] || service.icon_url 
+        }));
+        setServices(mappedServices);
+      }
+    }
+    fetchServices();
+  }, []);
+
   return (
     <>
       <motion.div variants={textVariant()}>
@@ -47,18 +70,27 @@ const About = () => {
         variants={fadeIn("", "", 0.1, 1)}
         className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
       >
-          👋 Hello there! I'm Oyeniran Jeremiah Damilare, a dynamic Front-End Developer and Smart Contract Engineer driven by a relentless passion for technology and innovation. With a diploma in Computer Engineering from The Polytechnic Ibadan, I've honed my skills to craft immersive digital experiences that seamlessly blend the worlds of web development and blockchain technology.
+       👋 Hello there! I'm Oyeniran Jeremiah Damilare, a dynamic Front-End Developer and Smart Contract Engineer driven by a relentless passion for technology and innovation. With a Diploma in Computer Engineering from The Polytechnic Ibadan, I’ve cultivated a strong technical foundation and expanded it through continuous learning and hands-on experience.
 
-💡 My journey began with mastering the core languages of the web - HTML, CSS, and JavaScript. As I delved deeper, I embraced cutting-edge frameworks like React and Next.js, alongside design tools like Figma, to sculpt captivating user interfaces that captivate and engage audiences.
+🎓 My educational journey reflects my commitment to growth and excellence:
 
-🔗 But my fascination with technology didn't stop there. I ventured into the realm of blockchain, where I found my calling in Smart Contract Development. Armed with expertise in Solidity, Ethereum, and beyond, I architect decentralized solutions that redefine possibilities. From concept to execution, I thrive on transforming innovative ideas into tangible realities that reshape industries.
+Ladoke Akintola University of Technology (LAUTECH) — B.Sc. in Computer Science (2023–2027)
 
-🚀 Whether it's crafting responsive web experiences that elevate user engagement or architecting decentralized applications poised to disrupt traditional paradigms, I'm fueled by a relentless pursuit of excellence. With a keen eye for detail and a penchant for pushing boundaries, I'm committed to pushing the envelope of what's possible in the digital landscape.
+SQI College of ICT — Software Engineering (2020–2022)
 
-💼 Are you ready to embark on a journey of digital transformation? Let's collaborate and build the future together, one line of code at a time.
+The Polytechnic Ibadan — Diploma in Computer Engineering (2017–2019)
+
+💡 My path began with mastering the core languages of the web — HTML, CSS, and JavaScript. As I evolved, I embraced frameworks and tools like React, Next.js, Tailwind CSS, Figma, and Web3Modal to craft intuitive and captivating user interfaces that connect people seamlessly to Web3 experiences.
+
+🔗 My fascination with technology led me into blockchain development, where I found purpose in building decentralized solutions that redefine what’s possible. Equipped with Solidity, Foundry, Ethers.js, and PostgreSQL, I design and deploy secure and efficient smart contracts across Ethereum, Kaia (Klaytn), and Flare Network. My work explores Account Abstraction, FTSO price feeds, and cross-chain interoperability, pushing the limits of decentralized innovation.
+
+🚀 Whether I’m developing responsive front-end experiences, architecting blockchain protocols, or bridging real-world applications into Web3, I’m driven by creativity, precision, and a desire to make lasting impact. With every project, I strive to deliver solutions that are not only functional but transformative.
+
+💼 Are you ready to embark on a journey of digital transformation? Let’s collaborate and build the future together — one line of code at a time.
     </motion.p>
 
       <div className='mt-20 flex flex-wrap gap-10'>
+        {/* Render dynamic services */}
         {services.map((service, index) => (
           <ServiceCard key={service.title} index={index} {...service} />
         ))}
