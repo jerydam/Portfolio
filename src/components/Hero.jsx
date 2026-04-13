@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 
 import { styles } from "../styles";
 import { ComputersCanvas } from "./canvas";
+import { ErrorBoundary } from "./ErrorBoundary";
 
 const Hero = () => {
   return (
@@ -23,7 +24,9 @@ const Hero = () => {
         </div>
       </div>
 
-      <ComputersCanvas />
+     <ErrorBoundary fallback={<div className="w-full h-full bg-primary" />}>
+  <ComputersCanvas />
+</ErrorBoundary>
 
       <div className='absolute xs:bottom-10npm run dev bottom-32 w-full flex justify-center items-center'>
         <a href='#about'>
