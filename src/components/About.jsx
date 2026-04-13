@@ -66,29 +66,22 @@ const About = () => {
         <h2 className={styles.sectionHeadText}>Overview.</h2>
       </motion.div>
 
-      <motion.p
-        variants={fadeIn("", "", 0.1, 1)}
-        className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
-      >
-       👋 Hello there! I'm Oyeniran Jeremiah Damilare, a dynamic Front-End Developer and Smart Contract Engineer driven by a relentless passion for technology and innovation. With a Diploma in Computer Engineering from The Polytechnic Ibadan, I’ve cultivated a strong technical foundation and expanded it through continuous learning and hands-on experience.
+     <motion.p
+  variants={fadeIn("", "", 0.1, 1)}
+  className='mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]'
+>
+  I'm Oyeniran Jeremiah Damilare — a full-stack Web3 developer, smart contract engineer, and Co-founder of FaucetDrops, an automated on-chain engagement and reward distribution platform live across Celo, Base, BNB Chain, Lisk, and Arbitrum.
 
-🎓 My educational journey reflects my commitment to growth and excellence:
+  I specialize in building end-to-end blockchain products that are not just functional, but usable. My stack spans Python (FastAPI) and Supabase for backend systems, Next.js and TypeScript for frontend development, and Solidity with Foundry for secure smart contract engineering. I actively work with tools like Web3.py, Ethers.js, Wagmi, to deliver seamless onboarding experiences, embedded wallets, and frictionless multi-chain interactions that make Web3 products feel as intuitive as Web2.
 
-Ladoke Akintola University of Technology (LAUTECH) — B.Sc. in Computer Science (2023–2027)
+  Beyond FaucetDrops, I've designed and shipped multiple real-world blockchain solutions — including HealFi (a healthcare-focused DeFi platform), ContriBoost (a decentralized group savings and fundraising protocol), ClimaLink (a climate-reporting DAO), and a multisig wallet system on Base. My work consistently focuses on solving practical problems using decentralized infrastructure.
 
-SQI College of ICT — Software Engineering (2020–2022)
+  I'm deeply involved in the Web3 ecosystem — contributing to open-source projects, participating in global hackathons, and building within communities like Celo, StarkNet, and Base. I'm currently expanding my expertise into Rust, with a focus on high-performance blockchain infrastructure and protocol-level development.
 
-The Polytechnic Ibadan — Diploma in Computer Engineering (2017–2019)
+  Currently pursuing a B.Sc. in Computer Science at LAUTECH (2023–2027), I’m passionate about building in public, sharing knowledge, and driving adoption of blockchain technology through education, community, and impactful products.
 
-💡 My path began with mastering the core languages of the web — HTML, CSS, and JavaScript. As I evolved, I embraced frameworks and tools like React, Next.js, Tailwind CSS, Figma, and Web3Modal to craft intuitive and captivating user interfaces that connect people seamlessly to Web3 experiences.
-
-🔗 My fascination with technology led me into blockchain development, where I found purpose in building decentralized solutions that redefine what’s possible. Equipped with Solidity, Foundry, Ethers.js, and PostgreSQL, I design and deploy secure and efficient smart contracts across Ethereum, Kaia (Klaytn), and Flare Network. My work explores Account Abstraction, FTSO price feeds, and cross-chain interoperability, pushing the limits of decentralized innovation.
-
-🚀 Whether I’m developing responsive front-end experiences, architecting blockchain protocols, or bridging real-world applications into Web3, I’m driven by creativity, precision, and a desire to make lasting impact. With every project, I strive to deliver solutions that are not only functional but transformative.
-
-💼 Are you ready to embark on a journey of digital transformation? Let’s collaborate and build the future together — one line of code at a time.
-    </motion.p>
-
+  I'm always open to collaborating on ambitious ideas and exploring opportunities where blockchain meets real-world utility.
+</motion.p>
       <div className='mt-20 flex flex-wrap gap-10'>
         {/* Render dynamic services */}
         {services.map((service, index) => (

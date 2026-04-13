@@ -296,38 +296,21 @@ const Works = () => {
       </div>
 
       <div className='mt-20 flex flex-wrap gap-7'>
-  {loading ? (
-    <div className="w-full flex justify-center">
-      <div className="animate-pulse flex space-x-4">
-        <div className="rounded-2xl bg-tertiary h-96 w-80"></div>
-        <div className="rounded-2xl bg-tertiary h-96 w-80"></div>
-        <div className="rounded-2xl bg-tertiary h-96 w-80"></div>
+        {loading ? (
+          <div className="w-full flex justify-center">
+            <div className="animate-pulse flex space-x-4">
+              <div className="rounded-2xl bg-tertiary h-96 w-80"></div>
+              <div className="rounded-2xl bg-tertiary h-96 w-80"></div>
+              <div className="rounded-2xl bg-tertiary h-96 w-80"></div>
+            </div>
+          </div>
+        ) : (
+          projects.map((project, index) => (
+            <ProjectCard key={`project-${index}`} index={index} {...project} />
+          )
+        )
+        )}
       </div>
-    </div>
-  ) : projects.length > 0 ? (
-    projects.map((project, index) => (
-      <ProjectCard 
-        key={`project-${index}`} 
-        index={index} 
-        {...project} 
-      />
-    ))
-  ) : (
-    <div className="w-full text-center py-10">
-      <p className="text-secondary text-[18px]">
-        No projects loaded. Check the browser console for errors.
-      </p>
-      <a 
-        href={`https://github.com/${githubUsername}`} 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="text-[#915EFF] underline mt-4 inline-block"
-      >
-        View all projects on GitHub →
-      </a>
-    </div>
-  )}
-</div>
       
       <div className='mt-10 flex justify-center'>
         <a 
