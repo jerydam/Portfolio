@@ -47,24 +47,23 @@ const Feedbacks = () => {
   const [testimonials, setTestimonials] = useState([]); // 👈 State for testimonials
 
   useEffect(() => {
-    async function fetchTestimonials() {
+  async function fetchTestimonials() {
+    try {
       const { data, error } = await supabase
         .from('testimonials')
         .select('*');
 
-      if (error) {
-        console.error('Error fetching testimonials:', error);
-      } else {
-        // Map image_url (from Supabase) to image (for the component prop)
-        const mappedTestimonials = data.map(t => ({
-          ...t,
-          image: t.image_url 
-        }));
-        setTestimonials(mappedTestimonials);
-      }
+      if (error) throw error;
+
+      const mapped = data?.map(t => ({ ...t, image: t.image_url })) || [];
+      setTestimonials(mapped);
+    } catch (error) {
+      console.error('Error fetching testimonials:', error);
+      setTestimonials([]); // or static fallbacks
     }
-    fetchTestimonials();
-  }, []);
+  }
+  fetchTestimonials();
+}, []);
   
   return (
     <div className={`mt-12 bg-black-100 rounded-[20px]`}>

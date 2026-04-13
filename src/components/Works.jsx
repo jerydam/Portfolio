@@ -198,15 +198,17 @@ const Works = () => {
   };
 
   useEffect(() => {
-    const fetchGithubProjects = async () => {
-      try {
-        setLoading(true);
-        
-        // Fetch repositories
-        const res = await fetch(
-          `https://api.github.com/users/${githubUsername}/repos?sort=pushed&direction=desc&per_page=9`
-        );
-        const repos = await res.json();
+  const fetchGithubProjects = async () => {
+    try {
+      setLoading(true);
+      
+      const res = await fetch(
+        `https://api.github.com/users/${githubUsername}/repos?sort=pushed&direction=desc&per_page=9`
+      );
+      
+      if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
+      
+      const repos = await res.json();
         
         // Filter out forks
         const nonForkedRepos = repos.filter(repo => !repo.fork);
@@ -260,19 +262,20 @@ const Works = () => {
             forks: repo.forks_count,
           };
         });
-        
-        const formattedProjects = await Promise.all(projectPromises);
-        setProjects(formattedProjects);
-        
-      } catch (error) {
-        console.error("Error fetching GitHub projects:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    fetchGithubProjects();
-  }, []);
+      const formattedProjects = await Promise.all(projectPromises);
+      setProjects(formattedProjects);
+    } catch (error) {
+      console.error("Error fetching GitHub projects:", error);
+      // Fallback: hardcode 2-3 projects or show a message
+      setProjects([]); // or some static data
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  fetchGithubProjects();
+}, []);
 
   return (
     <>
@@ -293,20 +296,38 @@ const Works = () => {
       </div>
 
       <div className='mt-20 flex flex-wrap gap-7'>
-        {loading ? (
-          <div className="w-full flex justify-center">
-            <div className="animate-pulse flex space-x-4">
-              <div className="rounded-2xl bg-tertiary h-96 w-80"></div>
-              <div className="rounded-2xl bg-tertiary h-96 w-80"></div>
-              <div className="rounded-2xl bg-tertiary h-96 w-80"></div>
-            </div>
-          </div>
-        ) : (
-          projects.map((project, index) => (
-            <ProjectCard key={`project-${index}`} index={index} {...project} />
-          ))
-        )}
+  {loading ? (
+    <div className="w-full flex justify-center">
+      <div className="animate-pulse flex space-x-4">
+        <div className="rounded-2xl bg-tertiary h-96 w-80"></div>
+        <div className="rounded-2xl bg-tertiary h-96 w-80"></div>
+        <div className="rounded-2xl bg-tertiary h-96 w-80"></div>
       </div>
+    </div>
+  ) : projects.length > 0 ? (
+    projects.map((project, index) => (
+      <ProjectCard 
+        key={`project-${index}`} 
+        index={index} 
+        {...project} 
+      />
+    ))
+  ) : (
+    <div className="w-full text-center py-10">
+      <p className="text-secondary text-[18px]">
+        No projects loaded. Check the browser console for errors.
+      </p>
+      <a 
+        href={`https://github.com/${githubUsername}`} 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="text-[#915EFF] underline mt-4 inline-block"
+      >
+        View all projects on GitHub →
+      </a>
+    </div>
+  )}
+</div>
       
       <div className='mt-10 flex justify-center'>
         <a 
