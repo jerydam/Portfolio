@@ -1,14 +1,15 @@
 import React, { useRef, useState } from "react";
-import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import { toast, ToastContainer } from 'react-toastify';
 
 import { styles } from "../styles";
 import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
-import { slideIn } from "../utils/motion";
+import { useScrollReveal } from "../hooks/useScrollReveal";
 
 const Contact = () => {
+  const [formRevealRef, formVisible] = useScrollReveal();
+  const [earthRevealRef, earthVisible] = useScrollReveal();
   const formRef = useRef();
   const [form, setForm] = useState({
     name: "",
@@ -136,9 +137,11 @@ const Contact = () => {
       <div
         className={`xl:mt-12 flex xl:flex-row flex-col-reverse gap-10 overflow-hidden`}
       >
-        <motion.div
-          variants={slideIn("left", "tween", 0.2, 1)}
-          className='flex-[0.75] bg-black-100 p-8 rounded-2xl'
+        <div
+          ref={formRevealRef}
+          className={`flex-[0.75] bg-black-100 p-8 rounded-2xl reveal reveal-left ${
+            formVisible ? "reveal-visible" : ""
+          }`}
         >
           <p className={styles.sectionSubText}>Get in touch</p>
           <h3 className={styles.sectionHeadText}>Contact.</h3>
@@ -203,14 +206,16 @@ const Contact = () => {
               )}
             </button>
           </form>
-        </motion.div>
+        </div>
 
-        <motion.div
-          variants={slideIn("right", "tween", 0.2, 1)}
-          className='xl:flex-1 xl:h-auto md:h-[550px] h-[350px]'
+        <div
+          ref={earthRevealRef}
+          className={`xl:flex-1 xl:h-auto md:h-[550px] h-[350px] reveal reveal-right ${
+            earthVisible ? "reveal-visible" : ""
+          }`}
         >
           <EarthCanvas />
-        </motion.div>
+        </div>
       </div>
     </>
   );
