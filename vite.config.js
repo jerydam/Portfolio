@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [react()],
   build: {
     target: 'es2019',        // Good start — try 'es2015' if still issues on very old iOS
-    sourcemap: true,
+    sourcemap: false,
     rollupOptions: {
       output: {
         manualChunks: undefined,   // Helps with some chunk loading issues
