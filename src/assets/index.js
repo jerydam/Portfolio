@@ -1,9 +1,9 @@
 import logo from "./logo.svg";
-import backend from "./backend.png";
-import creator from "./creator.png";
-import mobile from "./mobile.png";
-import web from "./web.png";
-import github from "./github.png";
+import backend from "./backend.webp";
+import creator from "./creator.webp";
+import mobile from "./mobile.webp";
+import web from "./web.webp";
+import github from "./github.webp";
 import menu from "./menu.svg";
 import close from "./close.svg";
 
@@ -21,10 +21,10 @@ import tailwind from "./tech/tailwind.png";
 import typescript from "./tech/typescript.png";
 import threejs from "./tech/threejs.svg";
 
-import meta from "./company/meta.png";
-import shopify from "./company/shopify.png";
-import starbucks from "./company/starbucks.png";
-import tesla from "./company/tesla.png";
+import meta from "./company/meta.webp";
+import shopify from "./company/shopify.webp";
+import starbucks from "./company/starbucks.webp";
+import tesla from "./company/tesla.webp";
 
 import carrent from "./carrent.png";
 import jobit from "./stake.png";

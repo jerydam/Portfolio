@@ -36,6 +36,7 @@ const ProjectCard = ({
             <img
               src={image}
               alt='project_image'
+              loading='lazy'
               className='w-full h-full object-cover rounded-2xl'
             />
           ) : (
@@ -52,6 +53,9 @@ const ProjectCard = ({
               <img
                 src={github}
                 alt='source code'
+                width={20}
+                height={20}
+                loading='lazy'
                 className='w-1/2 h-1/2 object-contain'
               />
             </div>

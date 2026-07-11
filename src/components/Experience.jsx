@@ -28,6 +28,9 @@ const ExperienceCard = ({ experience }) => {
           <img
             src={experience.icon}
             alt={experience.company_name}
+            width={40}
+            height={40}
+            loading='lazy'
             className='w-[60%] h-[60%] object-contain'
           />
         </div>
