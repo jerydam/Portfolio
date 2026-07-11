@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   VerticalTimeline,
   VerticalTimelineElement,
@@ -8,12 +8,11 @@ import { motion } from "framer-motion";
 import "react-vertical-timeline-component/style.min.css";
 
 import { styles } from "../styles";
-import { supabase, iconMap } from "../supabaseClient"; // 👈 New import
+import { experiences } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { textVariant } from "../utils/motion";
 
 const ExperienceCard = ({ experience }) => {
-  // Ensure points is handled as an array (Supabase can store it as `text[]`)
   const pointsArray = Array.isArray(experience.points) ? experience.points : [experience.points];
 
   return (
@@ -62,29 +61,6 @@ const ExperienceCard = ({ experience }) => {
 };
 
 const Experience = () => {
-  const [experiences, setExperiences] = useState([]); // 👈 State for experiences
-
-  useEffect(() => {
-    async function fetchExperiences() {
-      const { data, error } = await supabase
-        .from('experiences')
-        .select('*')
-        .order('id', { ascending: false }); // Optional: Order by ID or date
-
-      if (error) {
-        console.error('Error fetching experiences:', error);
-      } else {
-        // Map the icon_url (string) to the actual imported asset
-        const mappedExperiences = data.map(exp => ({
-          ...exp,
-          icon: iconMap[exp.icon_url] || exp.icon_url 
-        }));
-        setExperiences(mappedExperiences);
-      }
-    }
-    fetchExperiences();
-  }, []);
-  
   return (
     <>
       <motion.div variants={textVariant()}>

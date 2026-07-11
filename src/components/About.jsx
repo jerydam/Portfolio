@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Tilt from "react-tilt";
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
-import { supabase, iconMap } from "../supabaseClient"; // 👈 New import
+import { services } from "../constants";
 import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
 
@@ -37,28 +37,6 @@ const ServiceCard = ({ index, title, icon }) => (
 );
 
 const About = () => {
-  const [services, setServices] = useState([]); // 👈 State for services
-
-  useEffect(() => {
-    async function fetchServices() {
-      const { data, error } = await supabase
-        .from('services')
-        .select('*');
-
-      if (error) {
-        console.error('Error fetching services:', error);
-      } else {
-        // Map the icon_url (string) to the actual imported asset
-        const mappedServices = data.map(service => ({
-          ...service,
-          icon: iconMap[service.icon_url] || service.icon_url 
-        }));
-        setServices(mappedServices);
-      }
-    }
-    fetchServices();
-  }, []);
-
   return (
     <>
       <motion.div variants={textVariant()}>

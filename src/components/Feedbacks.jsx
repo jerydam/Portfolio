@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 
 import { styles } from "../styles";
 import { SectionWrapper } from "../hoc";
 import { fadeIn, textVariant } from "../utils/motion";
-import { supabase } from "../supabaseClient"; // 👈 New import
+import { testimonials } from "../constants";
 
 const FeedbackCard = ({
   index,
@@ -44,27 +44,6 @@ const FeedbackCard = ({
 );
 
 const Feedbacks = () => {
-  const [testimonials, setTestimonials] = useState([]); // 👈 State for testimonials
-
-  useEffect(() => {
-  async function fetchTestimonials() {
-    try {
-      const { data, error } = await supabase
-        .from('testimonials')
-        .select('*');
-
-      if (error) throw error;
-
-      const mapped = data?.map(t => ({ ...t, image: t.image_url })) || [];
-      setTestimonials(mapped);
-    } catch (error) {
-      console.error('Error fetching testimonials:', error);
-      setTestimonials([]); // or static fallbacks
-    }
-  }
-  fetchTestimonials();
-}, []);
-  
   return (
     <div className={`mt-12 bg-black-100 rounded-[20px]`}>
       <div
