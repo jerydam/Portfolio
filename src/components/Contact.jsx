@@ -1,11 +1,12 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, lazy, Suspense } from "react";
 import emailjs from "@emailjs/browser";
 import { toast, ToastContainer } from 'react-toastify';
 
 import { styles } from "../styles";
-import { EarthCanvas } from "./canvas";
 import { SectionWrapper } from "../hoc";
 import { useScrollReveal } from "../hooks/useScrollReveal";
+
+const EarthCanvas = lazy(() => import("./canvas/Earth"));
 
 const Contact = () => {
   const [formRevealRef, formVisible] = useScrollReveal();
@@ -214,7 +215,9 @@ const Contact = () => {
             earthVisible ? "reveal-visible" : ""
           }`}
         >
-          <EarthCanvas />
+          <Suspense fallback={null}>
+            <EarthCanvas />
+          </Suspense>
         </div>
       </div>
     </>
