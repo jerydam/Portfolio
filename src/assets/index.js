@@ -26,10 +26,6 @@ import shopify from "./company/shopify.webp";
 import starbucks from "./company/starbucks.webp";
 import tesla from "./company/tesla.webp";
 
-import carrent from "./carrent.png";
-import jobit from "./stake.png";
-import tripguide from "./nft.png";
-
 export {
   logo,
   backend,
@@ -56,7 +52,4 @@ export {
   shopify,
   starbucks,
   tesla,
-  carrent,
-  jobit,
-  tripguide,
 };

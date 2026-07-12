@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import { styles } from "../styles";
 import { github } from "../assets";
 import { SectionWrapper } from "../hoc";
 import { useScrollReveal } from "../hooks/useScrollReveal";
+import { projects } from "../data/projects";
 import Tilt from "./Tilt";
 
 const ProjectCard = ({
@@ -64,16 +65,16 @@ const ProjectCard = ({
                 onClick={() => window.open(live_demo_link, "_blank")}
                 className='bg-gradient-to-r from-purple-500 to-pink-500 w-10 h-10 rounded-full flex justify-center items-center cursor-pointer'
               >
-                <svg 
-                  className="w-5 h-5 text-white" 
-                  fill="none" 
-                  stroke="currentColor" 
+                <svg
+                  className="w-5 h-5 text-white"
+                  fill="none"
+                  stroke="currentColor"
                   viewBox="0 0 24 24"
                 >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
                     d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                   />
                 </svg>
@@ -105,187 +106,6 @@ const ProjectCard = ({
 };
 
 const Works = () => {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const githubUsername = 'jerydam';
-  
-  // Helper function to extract description from README content
-  const extractDescriptionFromReadme = (readmeContent) => {
-    if (!readmeContent) return 'No description available.';
-    
-    // Decode base64 content
-    const decodedContent = atob(readmeContent);
-    
-    // Remove common markdown elements and clean up
-    let cleanContent = decodedContent
-      // Remove headers
-      .replace(/#{1,6}\s.*$/gm, '')
-      // Remove images
-      .replace(/!\[.*?\]\(.*?\)/g, '')
-      // Remove links but keep text
-      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-      // Remove code blocks
-      .replace(/```[\s\S]*?```/g, '')
-      .replace(/`[^`]*`/g, '')
-      // Remove HTML tags
-      .replace(/<[^>]*>/g, '')
-      // Remove badges (shields.io, etc.)
-      .replace(/!\[.*?\]\(.*?shields\.io.*?\)/g, '')
-      // Remove horizontal rules
-      .replace(/---+|___+|\*\*\*+/g, '')
-      // Remove bullet points and numbering
-      .replace(/^\s*[-*+]\s+/gm, '')
-      .replace(/^\s*\d+\.\s+/gm, '')
-      // Remove extra whitespace and newlines
-      .replace(/\n{3,}/g, '\n\n')
-      .trim();
-    
-    // Get the first meaningful paragraph (skip empty lines)
-    const paragraphs = cleanContent.split('\n').filter(p => p.trim().length > 20);
-    
-    if (paragraphs.length === 0) {
-      return 'No description available.';
-    }
-    
-    // Get first 1-2 paragraphs or up to 200 characters
-    let description = paragraphs[0];
-    if (description.length < 100 && paragraphs[1]) {
-      description += ' ' + paragraphs[1];
-    }
-    
-    // Truncate if too long
-    if (description.length > 200) {
-      description = description.substring(0, 197) + '...';
-    }
-    
-    return description;
-  };
-
-  // Helper function to fetch README for a repository
-  const fetchReadme = async (repoName) => {
-    try {
-      // Try to fetch README (GitHub API automatically finds README.md, readme.md, etc.)
-      const readmeRes = await fetch(
-        `https://api.github.com/repos/${githubUsername}/${repoName}/readme`,
-        {
-          headers: {
-            'Accept': 'application/vnd.github.v3+json'
-          }
-        }
-      );
-      
-      if (readmeRes.ok) {
-        const readmeData = await readmeRes.json();
-        return extractDescriptionFromReadme(readmeData.content);
-      }
-    } catch (error) {
-      console.error(`Error fetching README for ${repoName}:`, error);
-    }
-    return null;
-  };
-
-  // Helper function to fetch repository topics/tags
-  const fetchRepoTopics = async (repoName) => {
-    try {
-      const topicsRes = await fetch(
-        `https://api.github.com/repos/${githubUsername}/${repoName}/topics`,
-        {
-          headers: {
-            'Accept': 'application/vnd.github.mercy-preview+json'
-          }
-        }
-      );
-      
-      if (topicsRes.ok) {
-        const topicsData = await topicsRes.json();
-        return topicsData.names || [];
-      }
-    } catch (error) {
-      console.error(`Error fetching topics for ${repoName}:`, error);
-    }
-    return [];
-  };
-
-  useEffect(() => {
-  const fetchGithubProjects = async () => {
-    try {
-      setLoading(true);
-      
-      const res = await fetch(
-        `https://api.github.com/users/${githubUsername}/repos?sort=pushed&direction=desc&per_page=9`
-      );
-      
-      if (!res.ok) throw new Error(`GitHub API error: ${res.status}`);
-      
-      const repos = await res.json();
-        
-        // Filter out forks
-        const nonForkedRepos = repos.filter(repo => !repo.fork);
-        
-        // Fetch README and topics for each repo in parallel
-        const projectPromises = nonForkedRepos.slice(0, 6).map(async (repo) => {
-          const [readmeDescription, topics] = await Promise.all([
-            fetchReadme(repo.name),
-            fetchRepoTopics(repo.name)
-          ]);
-          
-          // Create tags based on language and topics
-          const tags = [];
-          
-          // Add primary language
-          if (repo.language) {
-            tags.push({ 
-              name: repo.language, 
-              color: 'blue-text-gradient' 
-            });
-          }
-          
-          // Add up to 2 topics
-          topics.slice(0, 2).forEach(topic => {
-            tags.push({ 
-              name: topic, 
-              color: 'green-text-gradient' 
-            });
-          });
-          
-          // If no tags yet, add default
-          if (tags.length === 0) {
-            tags.push({ 
-              name: 'Repository', 
-              color: 'pink-text-gradient' 
-            });
-          }
-          
-          // Determine if there's a live demo (GitHub Pages or homepage)
-          const live_demo_link = repo.homepage || 
-            (repo.has_pages ? `https://${githubUsername}.github.io/${repo.name}/` : null);
-
-          return {
-            name: repo.name.replace(/-/g, ' ').replace(/_/g, ' '),
-            description: readmeDescription || repo.description || 'No description available.',
-            source_code_link: repo.html_url,
-            live_demo_link: live_demo_link,
-            image: null, // You can add logic to fetch images from README if needed
-            tags: tags,
-            stars: repo.stargazers_count,
-            forks: repo.forks_count,
-          };
-        });
-
-      const formattedProjects = await Promise.all(projectPromises);
-      setProjects(formattedProjects);
-    } catch (error) {
-      console.error("Error fetching GitHub projects:", error);
-      // Fallback: hardcode 2-3 projects or show a message
-      setProjects([]); // or some static data
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  fetchGithubProjects();
-}, []);
-
   return (
     <>
       <div>
@@ -295,32 +115,21 @@ const Works = () => {
 
       <div className='w-full flex'>
         <p className='mt-3 text-secondary text-[17px] max-w-3xl leading-[30px]'>
-          Following projects showcases my skills and experience through
-          real-world examples of my work. Each project is
-          dynamically pulled from my github, ensuring accuracy and relevance.
+          A few things I've shipped in the Web3 space - spanning on-chain
+          reward distribution, embedded wallet infrastructure, ZK identity,
+          and decentralized savings protocols.
         </p>
       </div>
 
       <div className='mt-20 flex flex-wrap gap-7'>
-        {loading ? (
-          <div className="w-full flex justify-center">
-            <div className="animate-pulse flex space-x-4">
-              <div className="rounded-2xl bg-tertiary h-96 w-80"></div>
-              <div className="rounded-2xl bg-tertiary h-96 w-80"></div>
-              <div className="rounded-2xl bg-tertiary h-96 w-80"></div>
-            </div>
-          </div>
-        ) : (
-          projects.map((project, index) => (
-            <ProjectCard key={`project-${index}`} index={index} {...project} />
-          )
-        )
-        )}
+        {projects.map((project, index) => (
+          <ProjectCard key={project.name} index={index} {...project} />
+        ))}
       </div>
-      
+
       <div className='mt-10 flex justify-center'>
-        <a 
-          href={`https://github.com/${githubUsername}`}
+        <a
+          href="https://github.com/jerydam"
           target="_blank"
           rel="noopener noreferrer"
           className='bg-[#915EFF] text-white font-bold py-3 px-8 rounded-xl shadow-md transition-all duration-300 ease-in-out hover:bg-opacity-90 hover:scale-105 transform'
@@ -332,4 +141,4 @@ const Works = () => {
   );
 };
 
-export default SectionWrapper(Works, "");
+export default SectionWrapper(Works, "work");
